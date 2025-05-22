@@ -20,7 +20,7 @@ def get_stock(ticker: str):
 
         return {
             "Ticker": ticker,
-            "Date": row["Date"].strftime("%Y-%m-%d"),
+            "Date": str(row["Date"]),
             "Open": round(row["Open"], 2),
             "High": round(row["High"], 2),
             "Low": round(row["Low"], 2),
