@@ -14,8 +14,8 @@ app.add_middleware(
 @app.get("/stock/{ticker}")
 def get_stock(ticker: str):
     try:
-        ticker = ticker.replace(".", "-")  # e.g. BRK.B → BRK-B
-        data = yf.download(ticker, period="7d", interval="1d", progress=False)
+        ticker = ticker.replace(".", "-")  # Handle BRK.B → BRK-B
+        data = yf.download(ticker, period="14d", interval="1d", progress=False)
 
         if data.empty:
             return { "error": f"No data for {ticker}", "Ticker": ticker }
@@ -32,7 +32,6 @@ def get_stock(ticker: str):
             "Close": round(row["Close"], 2),
             "Volume": int(row["Volume"])
         }
+
     except Exception as e:
-        return { "error": str(e) }
-
-
+        return { "error": str(e), "Ticker": ticker }
