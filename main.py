@@ -18,7 +18,7 @@ def get_stock(ticker: str):
         data = yf.download(ticker, period="7d", interval="1d", progress=False)
 
         if data.empty:
-            return { "error": f"No data for {ticker}" }
+            return { "error": f"No data for {ticker}", "Ticker": ticker }
 
         latest = data.tail(1).reset_index()
         row = latest.iloc[0]
