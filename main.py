@@ -11,7 +11,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.get("/stock")
+@app.get("/stock/{ticker}")
 def get_stock(ticker: str):
     try:
         data = yf.download(ticker, period="7d", interval="1d", progress=False)
@@ -29,3 +29,4 @@ def get_stock(ticker: str):
         }
     except Exception as e:
         return {"error": str(e)}
+
